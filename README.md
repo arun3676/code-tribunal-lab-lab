@@ -1,72 +1,87 @@
 # Code Council
- 
- Code Council — see how frontier models reason about your code.
 
-## Hero Screenshot
+**Multi-model code analysis — and Band-powered intent review for AI-generated diffs.**
 
-Add a dark Council View screenshot here once the new frontend is running locally or deployed.
+Code Council is a split-stack monorepo: a Next.js frontend and a FastAPI backend that stream multiple LLM opinions over the same code. The flagship hackathon mode, **Tribunal**, adds a Band-coordinated agent court that checks whether a diff actually matches the original ticket — not just whether the code looks correct.
 
-## What this is
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Code Council is a multi-model code analysis sandbox. Instead of one AI verdict, it lets you stream several model opinions over the same code and compare where they agree, disagree, or miss things entirely.
+## Features
 
-## Why this exists
-
-Most code-review AI products optimize for a single fast answer during PR time. That is useful, but it hides one of the most interesting parts of working with models: they often notice different risks, emphasize different tradeoffs, and disagree in ways that are actually informative.
-
-Code Council turns that disagreement into the product. The point is not to auto-merge fixes or replace engineering judgment. The point is to give you a place to inspect how multiple frontier models think about the same snippet, with streamed output, consensus signals, static scans, and multimodal input.
+| Mode | Status | Description |
+|------|--------|-------------|
+| **Solo** | Live | Stream one model's analysis with optional static security/performance scan |
+| **Council** | Live | Run 2–4 models in parallel; consensus ribbon and agreement matrix |
+| **Multimodal** | Live | Paste or drop an image for vision-model analysis |
+| **Tribunal** | Planned | Band multi-agent intent-conformance review — see [hackathon plan](docs/hackathon/plan.md) |
 
 ## Stack
 
-- Next.js 15
-- FastAPI
-- Railway
-- Vercel
-- Gemini
-- DeepSeek
-- Mercury
-- Kimi
+| Layer | Tech | Deploy |
+|-------|------|--------|
+| Frontend | Next.js 15, TypeScript, Tailwind, Monaco | Vercel |
+| Backend | FastAPI, SSE streaming, Pydantic | Railway |
+| Models | Gemini, DeepSeek, Mercury, Kimi | API keys |
 
-## Run locally
+## Repository layout
+
+```
+apps/api/     FastAPI backend (code_council package)
+apps/web/     Next.js frontend
+docs/         Architecture, structure, hackathon plans
+legacy/       Archived Streamlit-era modules (portfolio)
+```
+
+Full tree: [`docs/STRUCTURE.md`](docs/STRUCTURE.md)
+
+## Quick start
 
 ```bash
-git clone <repository-url>
-cd llm-code-analyzer
+git clone https://github.com/arun3676/code-tribunal-lab-lab.git
+cd code-tribunal-lab-lab
+cp .env.example .env    # add LLM API keys
 docker compose up
 ```
 
-Create a root `.env` file before starting local services.
+Open [http://localhost:3000](http://localhost:3000). API health: [http://localhost:8000/health](http://localhost:8000/health).
 
-Required variables:
+### Environment variables
+
+Copy [`.env.example`](.env.example) to `.env` at the repo root:
 
 ```env
 GEMINI_API_KEY=
 DEEPSEEK_API_KEY=
 MERCURY_API_KEY=
 Kimi_API_KEY=
-ALLOWED_ORIGINS=http://localhost:3000
 NEXT_PUBLIC_API_URL=http://localhost:8000
+ALLOWED_ORIGINS=http://localhost:3000
 ```
+
+See [`apps/api/.env.example`](apps/api/.env.example) for Railway-only vars and [`DEPLOYMENT.md`](DEPLOYMENT.md) for production.
 
 ## Deploy
 
-Deploy this as two services:
+Two services:
 
-- `apps/api` -> Railway
-- `apps/web` -> Vercel
+- `apps/api` → Railway (Dockerfile)
+- `apps/web` → Vercel (`NEXT_PUBLIC_API_URL` → Railway URL)
 
-The Vercel frontend needs the Railway backend URL in `NEXT_PUBLIC_API_URL`. The Railway backend needs the Vercel frontend origin in `ALLOWED_ORIGINS`; use `ALLOWED_ORIGIN_REGEX=https://.*\.vercel\.app` if you want Vercel preview deployments to work.
+Full checklist: [`DEPLOYMENT.md`](DEPLOYMENT.md)
 
-See [`DEPLOYMENT.md`](DEPLOYMENT.md) for the full checklist.
+## Documentation
 
-## Architecture
+| Doc | Purpose |
+|-----|---------|
+| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | System design and endpoints |
+| [STRUCTURE.md](docs/STRUCTURE.md) | Repo layout and conventions |
+| [hackathon/goal.md](docs/hackathon/goal.md) | Tribunal hackathon goals |
+| [hackathon/plan.md](docs/hackathon/plan.md) | Tribunal build execution plan |
 
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+## Legacy
 
-## What's in `/legacy`
-
-The `legacy/` directory preserves earlier iterations of the project: the original Streamlit UI, dashboard work, CI/CD tooling, and other analyzer experiments that helped shape the current product. They are intentionally kept as portfolio evidence, but they are not part of the active runtime.
+The [`legacy/`](legacy/) directory preserves earlier Streamlit and analyzer experiments. It is not part of the active runtime.
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE).

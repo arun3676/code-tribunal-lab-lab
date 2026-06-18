@@ -8,6 +8,7 @@ __pycache__/
 venv/
 env/
 ENV/
+testenv/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -23,12 +24,13 @@ dist/
 # Node / frontend
 node_modules/
 .next/
+out/
 .turbo/
+.pnpm-store/
 *.tsbuildinfo
 
 # Logs
 *.log
-streamlit_output.log
 
 # Coverage / reports
 .coverage
@@ -36,7 +38,7 @@ streamlit_output.log
 coverage.xml
 htmlcov/
 
-# IDE files
+# IDE / local tools
 .idea/
 .vscode/
 .claude/

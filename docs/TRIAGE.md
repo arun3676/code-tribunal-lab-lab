@@ -39,8 +39,8 @@
 | `.env` | PORT | Environment variables still drive provider availability. | Retain locally, but add `apps/api/.env.example` and avoid committing secrets. |
 | `projectstate.md` | ARCHIVE | Useful historical context, but describes the pre-migration app. | Preserve as a legacy design record. |
 | `code_council_plan.md` | PORT | This is the authoritative migration plan for the repo. | Keep at the root or reference from docs during the transition. |
-| `site color.jpg` | ARCHIVE | Static design asset is not part of the runtime. | Preserve if needed for branding references. |
-| `test_code_image.jpg` | ARCHIVE | Useful sample asset for multimodal testing, not runtime code. | Preserve for manual testing. |
+| `site color.jpg` | ARCHIVE | Static design asset is not part of the runtime. | Moved to `legacy/assets/site-color.jpg`. |
+| `test_code_image.jpg` | ARCHIVE | Useful sample asset for multimodal testing, not runtime code. | Moved to `legacy/assets/test-code-image.jpg`. |
 | `.venv/` | DELETE | Broken local virtual environment, not project source. | Remove locally and recreate a clean env outside version control if needed. |
 | `testenv/` | DELETE | Incomplete/broken Python environment, not project source. | Remove locally. |
 

@@ -15,3 +15,7 @@ The active product lives in:
 
 - `apps/web` for the Next.js frontend
 - `apps/api` for the FastAPI backend
+
+## Assets
+
+`legacy/assets/` holds design reference images and multimodal test samples. See [`assets/README.md`](./assets/README.md).

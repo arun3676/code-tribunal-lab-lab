@@ -51,7 +51,7 @@ export default function AboutPage() {
 
       <footer className="border-t border-[color:var(--border)] pt-4">
         <a
-          href="https://github.com/arun3676/llm-code-analyzer"
+          href="https://github.com/arun3676/code-tribunal-lab-lab"
           className="font-mono text-xs uppercase tracking-[0.2em] text-fg-muted hover:text-accent"
         >
           source on github →

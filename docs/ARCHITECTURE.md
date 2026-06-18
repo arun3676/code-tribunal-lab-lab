@@ -113,3 +113,18 @@ The frontend builds from `apps/web` and calls the Railway backend via `NEXT_PUBL
 - Missing provider keys should disable models rather than crash the backend.
 - SSE is the transport for long-running analysis so the frontend can stream tokens live.
 - The backend should remain import-clean without `langchain`, `chromadb`, or legacy UI dependencies.
+
+## Repository layout
+
+See [`STRUCTURE.md`](./STRUCTURE.md) for the canonical directory tree and file placement rules.
+
+## Planned: Tribunal mode
+
+**Code Council Tribunal** (Band of Agents Hackathon, Track 2) adds intent-conformance review:
+
+- Package: `apps/api/code_council/tribunal/`
+- UI route: `apps/web/src/app/tribunal/`
+- Endpoints: `GET /tribunal/fixtures`, `POST /tribunal/run` (SSE)
+- Band as coordination layer: @mentions, structured events, mid-trial recruitment
+
+Execution plan: [`docs/hackathon/plan.md`](./hackathon/plan.md)

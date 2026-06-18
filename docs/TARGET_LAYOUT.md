@@ -1,81 +1,79 @@
 # Target Layout
 
+Current monorepo layout (updated for Tribunal hackathon path). See [`STRUCTURE.md`](./STRUCTURE.md) for the canonical tree.
+
 ```text
-code-council/
+code-tribunal-lab-lab/
 ├── apps/
 │   ├── web/                 # Next.js 15 frontend (Vercel)
 │   └── api/                 # FastAPI backend (Railway)
-├── legacy/                  # ARCHIVE bucket from triage
+├── legacy/                  # Archived modules + assets/
 ├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── STRUCTURE.md
 │   ├── TRIAGE.md
-│   ├── TARGET_LAYOUT.md
-│   └── ARCHITECTURE.md
-├── .github/workflows/       # CI for type-check + lint
+│   ├── MIGRATION_PLAN.md
+│   └── hackathon/
+│       ├── goal.md
+│       └── plan.md
+├── .github/workflows/ci.yml
+├── docker-compose.yml
+├── .env.example
+├── LICENSE
 ├── README.md
-└── .gitignore
+└── DEPLOYMENT.md
 ```
 
-## Backend Layout
+## Backend layout
 
 ```text
 apps/api/
 ├── code_council/
-│   ├── __init__.py
-│   ├── analyzer.py
-│   ├── models.py
-│   ├── prompts.py
-│   ├── utils.py
-│   ├── language.py
-│   ├── multimodal.py
-│   ├── github.py
-│   ├── fixes.py
 │   ├── server.py
-│   └── scanners/
-│       ├── __init__.py
-│       ├── security.py
-│       └── performance.py
+│   ├── analyzer.py
+│   ├── models.py, prompts.py, utils.py, language.py
+│   ├── multimodal.py, fixes.py, github.py
+│   ├── scanners/            # security.py, performance.py
+│   └── tribunal/            # planned: Band intent-conformance workflow
 ├── pyproject.toml
 ├── Dockerfile
-└── .env.example
+├── railway.json
+└── README.md
 ```
 
-## Frontend Layout
+## Frontend layout
 
 ```text
 apps/web/
+├── src/
+│   ├── app/
+│   │   ├── page.tsx         # Solo + Council
+│   │   ├── about/
+│   │   ├── design/          # Design tokens (dev reference)
+│   │   └── tribunal/        # planned: War Room UI
+│   ├── components/
+│   │   ├── effects/matrix-rain.tsx
+│   │   └── shell/app-shell.tsx
+│   └── lib/
+│       └── api.ts           # JSON + SSE client
 ├── package.json
-├── next.config.ts
-├── postcss.config.js
-├── tailwind.config.ts
-├── tsconfig.json
-├── components.json
-├── public/
-│   └── favicon.svg
-└── src/
-    ├── app/
-    │   ├── globals.css
-    │   ├── layout.tsx
-    │   ├── page.tsx
-    │   ├── design/
-    │   │   └── page.tsx
-    │   └── api/
-    ├── components/
-    │   ├── effects/
-    │   │   └── matrix-rain.tsx
-    │   ├── shell/
-    │   ├── verdict/
-    │   ├── council/
-    │   └── ui/
-    └── lib/
-        ├── api.ts
-        ├── sse.ts
-        └── utils.ts
+└── vercel.json
 ```
 
-## Migration Rules
+## Migration rules
 
-- `apps/api/` becomes the only Python runtime.
-- `apps/web/` becomes the only user-facing UI.
-- `legacy/` stores archived modules unchanged where practical.
-- `docs/` is the canonical architecture and migration reference.
-- Root config files should assume a monorepo, not a single Streamlit app.
+- `apps/api/` is the only Python runtime.
+- `apps/web/` is the only user-facing UI.
+- `legacy/` is read-only archive — never imported by apps.
+- Root `code_analyzer/` was removed; ported code lives in `apps/api/code_council/`.
+- Tribunal code goes under `code_council/tribunal/`, not a sibling package.
+
+## Aspirational (post-Tribunal)
+
+These paths from the original migration plan are optional extractions:
+
+- `src/components/council/` — split from large `page.tsx`
+- `src/components/verdict/` — verdict stamp, trust meter, ledger
+- `src/lib/sse.ts` — extract SSE parser from `api.ts`
+
+Not required for hackathon submission.
