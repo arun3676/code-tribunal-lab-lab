@@ -4,10 +4,9 @@
 
 Code Council is a split-stack monorepo:
 
-- `apps/web` is a Next.js 15 App Router frontend deployed to Vercel.
-- `apps/api` is a FastAPI backend deployed to Railway.
-- `legacy` preserves archived modules from the original Streamlit-era application.
-- `docs` contains the migration and architecture records.
+- `apps/web` — Next.js 15 frontend (Vercel)
+- `apps/api` — FastAPI backend (Railway)
+- `docs` — architecture and Tribunal hackathon plans
 
 The product is intentionally **stateless**:
 

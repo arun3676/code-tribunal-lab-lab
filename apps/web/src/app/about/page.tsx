@@ -12,8 +12,8 @@ export default function AboutPage() {
         <Link href="/" className="font-mono text-xs uppercase tracking-[0.2em] text-fg-muted hover:text-accent">
           ← back
         </Link>
-        <h1 className="mt-4 font-mono text-2xl uppercase tracking-[0.16em] text-accent">Code Council</h1>
-        <p className="mt-2 text-sm text-fg-muted">See how frontier models reason about your code.</p>
+        <h1 className="mt-4 font-mono text-2xl uppercase tracking-[0.16em] text-accent">Code Council Tribunal</h1>
+        <p className="mt-2 text-sm text-fg-muted">Multi-model analysis today. Band-powered intent review next.</p>
       </header>
 
       <section className="space-y-3">
@@ -36,6 +36,14 @@ export default function AboutPage() {
           Code Council turns that disagreement into the product. The point is not to auto-merge fixes or
           replace engineering judgment — it is to give you a place to inspect how four frontier models think
           about the same snippet, with streamed output, consensus signals, static scans, and multimodal input.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-fg-muted">Tribunal (in build)</h2>
+        <p className="text-sm leading-relaxed text-fg">
+          Tribunal puts AI-generated diffs on trial: Band-connected agents compare the ticket against the
+          implementation, catch omissions and scope drift, and issue a merge verdict with a traceability ledger.
         </p>
       </section>
 

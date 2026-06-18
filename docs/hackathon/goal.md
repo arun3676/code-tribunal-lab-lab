@@ -251,9 +251,10 @@ Even if we do not win main prizes:
 
 | File | Purpose |
 |------|---------|
-| [`plan.md`](./plan.md) | Execution plan — blocks, files, acceptance criteria, video script |
-| [`../STRUCTURE.md`](../STRUCTURE.md) | Repo layout and conventions |
-| [`../MIGRATION_PLAN.md`](../MIGRATION_PLAN.md) | Historical monorepo migration spec |
+| [`plan.md`](./plan.md) | One-day execution plan |
+| [`BUILD.md`](./BUILD.md) | Full phased build spec |
+| [`../STRUCTURE.md`](../STRUCTURE.md) | Repo layout |
+| [`../tribunal-explainer.html`](../tribunal-explainer.html) | Judge-facing pitch deck |
 
 ---
 

@@ -1,38 +1,32 @@
 # Repository structure
 
-Professional layout for the Code Council monorepo. Active runtime code lives only under `apps/`.
+Layout for **Code Council Tribunal** — Band-powered intent-conformance review for AI-generated code.
 
 ```
 code-tribunal-lab-lab/
 ├── apps/
-│   ├── api/                    # FastAPI backend → Railway
-│   │   ├── code_council/       # Python package (single runtime)
+│   ├── api/
+│   │   ├── code_council/       # Python runtime
 │   │   │   ├── server.py
 │   │   │   ├── analyzer.py
 │   │   │   ├── scanners/
-│   │   │   ├── github.py       # Reserved for Tribunal docket ingestion
-│   │   │   └── tribunal/       # Planned: Band multi-agent workflow
+│   │   │   ├── github.py       # Tribunal docket helpers
+│   │   │   └── tribunal/       # (next) Band multi-agent workflow
 │   │   ├── Dockerfile
 │   │   ├── pyproject.toml
 │   │   └── README.md
-│   └── web/                    # Next.js 15 frontend → Vercel
-│       ├── src/
-│       │   ├── app/            # Routes: /, /about, /design, /tribunal (planned)
-│       │   ├── components/     # shell/, effects/
-│       │   └── lib/            # api.ts (SSE client)
-│       └── README.md
+│   └── web/
+│       ├── src/app/            # /, /about, /tribunal (planned)
+│       ├── src/components/
+│       └── src/lib/api.ts
 ├── docs/
-│   ├── ARCHITECTURE.md         # System design
-│   ├── STRUCTURE.md            # This file
-│   ├── TARGET_LAYOUT.md        # Layout reference
-│   ├── TRIAGE.md               # Migration decisions
-│   ├── MIGRATION_PLAN.md       # Historical migration spec
+│   ├── ARCHITECTURE.md
+│   ├── STRUCTURE.md
+│   ├── tribunal-explainer.html # Judge-facing case file / pitch
 │   └── hackathon/
-│       ├── goal.md             # Tribunal hackathon goals
-│       └── plan.md             # Tribunal execution plan
-├── legacy/                     # Archived pre-monorepo code (~127 KB)
-│   ├── assets/                 # Design + test images
-│   └── code_analyzer/          # Streamlit-era modules
+│       ├── goal.md
+│       ├── plan.md
+│       └── BUILD.md            # Full phased build spec
 ├── .github/workflows/ci.yml
 ├── docker-compose.yml
 ├── .env.example
@@ -41,23 +35,15 @@ code-tribunal-lab-lab/
 └── DEPLOYMENT.md
 ```
 
-## What belongs where
+## Rules
 
-| Location | Rule |
-|----------|------|
-| `apps/api/code_council/` | All Python runtime code |
-| `apps/web/src/` | All user-facing UI |
-| `legacy/` | Read-only archive; never imported by apps |
-| `docs/` | Architecture, migration, hackathon planning |
-| Root | Only monorepo config, README, compose, license |
+| Path | Purpose |
+|------|---------|
+| `apps/api/code_council/` | All backend code |
+| `apps/web/src/` | All frontend code |
+| `docs/hackathon/` | Tribunal goals, execution plan, build phases |
+| Root | Monorepo config only — no nested product folders |
 
-## Removed from the repo (intentionally)
+## Build target
 
-- Root `code_analyzer/` — duplicate of ported modules; use `apps/api/code_council/` and `legacy/`
-- Virtualenvs (`.venv/`, `testenv/`) — create locally; never commit
-- Build output (`.next/`, `*.egg-info/`, `node_modules/`) — gitignored
-- Log files — gitignored
-
-## Next build target
-
-**Code Council Tribunal** — Band-powered intent-conformance review for AI-generated code. See [`docs/hackathon/plan.md`](./hackathon/plan.md).
+See [`docs/hackathon/plan.md`](./hackathon/plan.md) for the one-day execution path and [`docs/hackathon/BUILD.md`](./hackathon/BUILD.md) for the full phased spec.
